@@ -1,3 +1,6 @@
 <%= link_to "Logout",logout_path  %>
 <h1>Accounts#show</h1>
 <p>Find me in app/views/accounts/show.html.erb</p>
+
+<%= @account.user.login %><hr />
+<%= @account.balance %>
