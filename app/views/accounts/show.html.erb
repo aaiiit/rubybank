@@ -1,8 +1,21 @@
+Logged in as <%= current_user.login %>
 <%= link_to "Logout",logout_path  %>
-<h1>Accounts#show</h1>
-<p>Find me in app/views/accounts/show.html.erb</p>
+<h1>Account <%= @account.user.login %></h1>
 
-<%= @account.user.login %><hr />
 <%= @account.balance %>
+<hr />
 
 <%= link_to "Een betaling uitvoeren",new_transaction_path %>
+
+<hr />
+
+<h2>Audit</h2>
+<ol>
+<% sum = 0 %>
+<% @account.lines.each do |l| %>
+  <% sum += l.amount %>
+  <li><%=  l.amount %></li>
+<% end %>
+</ol>
+
+TOTAL <%= sum %>
