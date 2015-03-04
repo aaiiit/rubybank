@@ -19,7 +19,7 @@ RSpec.describe Account, type: :model do
         @user.account
       end
       before do
-        account.add_credits(100)
+        account.add_credit 100
       end
 
       it "its balance should be 100" do
@@ -27,7 +27,7 @@ RSpec.describe Account, type: :model do
       end
 
       it "an accountline should be added" do
-        expect{ account.add_credits(10) }.to change{ account.lines.count }.by(1)
+        expect{ account.add_credit 10 }.to change{ account.lines.count }.by(1)
       end
 
     end

@@ -12,7 +12,11 @@ class Transaction < ActiveRecord::Base
 
   private
   def process!
-    sender_account.withdraw! self,amount
-    receiver_account.deposit! self,amount
+    begin
+      sender_account.withdraw! self,amount
+      receiver_account.deposit! self,amount
+    rescue Account::BalanceExceededException
+      raise Account::BalanceExceededException
+    end
   end
 end

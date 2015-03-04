@@ -21,6 +21,7 @@ require 'rails_helper'
 RSpec.describe TransactionsController, type: :controller do
   before do
     @sender = User.create(login: 'Sender',password: '12345',password_confirmation: '12345')
+    @sender.account.add_credit 100
     @receiver = User.create(login: 'Receiver',password: '12345',password_confirmation: '12345')
     controller.stub(:current_user).and_return(@sender)
   end
@@ -62,7 +63,7 @@ RSpec.describe TransactionsController, type: :controller do
         post :create, {:transaction => valid_attributes}, valid_session
         expect(assigns(:transaction)).to be_a(Transaction)
         expect(assigns(:transaction)).to be_persisted
-        expect(assigns(:transaction).sender_account.balance).to eq(-1)
+        expect(assigns(:transaction).sender_account.balance).to eq(99)
       end
 
       it "redirects to the created transaction" do
