@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
 
   after_create :create_account
 
-  protected
+  private
   def create_account
     self.account = Account.create
     self.save
