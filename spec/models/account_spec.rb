@@ -15,10 +15,10 @@ RSpec.describe Account, type: :model do
     end
 
     context "when given credits" do
-      @count = 0
+      subject(:line_count) { @user.account.lines.count }
+      # let(:line_count) { @user.account.lines.count }
 
       before do
-        @count = @user.account.lines.count
         @user.account.add_credits(100)
       end
 
@@ -27,7 +27,7 @@ RSpec.describe Account, type: :model do
       end
 
       it "an accountline should be added" do
-        expect(@user.account.lines.count).to eq(@user.account.lines.count)
+        expect{ @user.account.add_credits(10) }.to change{ @user.account.lines.count }.by(1)
       end
 
     end
