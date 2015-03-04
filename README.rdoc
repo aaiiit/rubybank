@@ -1,28 +1,14 @@
-== README
+# RubyBank
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A simple Rails banking app.  Users can be created in console.
+Via console we can also give the user some credit.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+User should be able to sign in and transfer money to other user.
+Users can not have negative balances and we need a trail on how we got to the balance.
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## Versions
+
+  * ruby 2.1.2
+  * rails 4.1
+
