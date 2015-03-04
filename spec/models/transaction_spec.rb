@@ -12,6 +12,14 @@ RSpec.describe Transaction, type: :model do
       @sender.account.add_credit 100
     end
 
+    context "pays Receiver -5" do
+      it "raises NegativeAmountException" do
+        tx = Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: -5)
+        expect { tx.save }.to raise_error(Transaction::NegativeAmountException)
+      end
+
+    end
+
     context "pays Receiver User 100" do
       subject(:tx) do
         Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 100)
