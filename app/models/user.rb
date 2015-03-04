@@ -6,7 +6,6 @@ class User < ActiveRecord::Base
 
   protected
   def create_account
-    puts "BUILDING ACCOUNT!!!!!!!!!!!!!"
     self.account = Account.create
     self.save
   end
