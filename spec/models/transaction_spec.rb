@@ -34,5 +34,27 @@ RSpec.describe Transaction, type: :model do
       end
     end
 
+    context "pays Receiver User 101" do
+      subject(:tx) do
+        Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 101)
+      end
+
+      it "creates a transaction" do
+        expect(tx.save).to eq(false)
+      end
+
+      it "Sender User still has 100" do
+        expect{ tx.save }.to eq(@sender.account.balance)
+      end
+
+      it "Receiver User still has 0" do
+        expect{ tx.save }.to eq(@receiver.account.balance)
+      end
+
+      it "should not have created AccountLines" do
+        expect{ tx.save }.to change { AccountLine.count }.by(0)
+      end
+    end
+
   end
 end

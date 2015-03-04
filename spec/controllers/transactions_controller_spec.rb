@@ -62,6 +62,7 @@ RSpec.describe TransactionsController, type: :controller do
         post :create, {:transaction => valid_attributes}, valid_session
         expect(assigns(:transaction)).to be_a(Transaction)
         expect(assigns(:transaction)).to be_persisted
+        expect(assigns(:transaction).sender_account.balance).to eq(-1)
       end
 
       it "redirects to the created transaction" do
