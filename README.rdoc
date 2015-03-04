@@ -7,6 +7,17 @@ User should be able to sign in and transfer money to other user.
 Users can not have negative balances and we need a trail on how we got to the balance.
 
 
+## Usage
+
+  * Install gems
+  * Run server
+  * Run console and add users
+    ```
+    bundle exec rails c
+    User.create login: 'mestdaght',password: '12345', password_confirmation: '12345'
+    ```
+
+
 ## Versions
 
   * ruby 2.1.2
