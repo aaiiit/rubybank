@@ -15,9 +15,6 @@ RSpec.describe Account, type: :model do
     end
 
     context "when given credits" do
-      subject(:line_count) { @user.account.lines.count }
-      # let(:line_count) { @user.account.lines.count }
-
       before do
         @user.account.add_credits(100)
       end
