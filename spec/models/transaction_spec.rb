@@ -39,21 +39,9 @@ RSpec.describe Transaction, type: :model do
         Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 101)
       end
 
-      it "fails" do
+      it "which exceeds the balance" do
         expect { tx.save }.to raise_error(Account::BalanceExceededException)
       end
-      #
-      # it "Sender User still has 100" do
-      #   expect{ tx.save }.to eq(@sender.account.balance)
-      # end
-      #
-      # it "Receiver User still has 0" do
-      #   expect{ tx.save }.to eq(@receiver.account.balance)
-      # end
-      #
-      # it "should not have created AccountLines" do
-      #   expect{ tx.save }.to change { AccountLine.count }.by(0)
-      # end
     end
 
   end

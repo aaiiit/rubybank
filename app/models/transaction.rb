@@ -12,11 +12,11 @@ class Transaction < ActiveRecord::Base
 
   private
   def process!
-    begin
-      sender_account.withdraw! self,amount
-      receiver_account.deposit! self,amount
-    rescue Account::BalanceExceededException
-      raise Account::BalanceExceededException
-    end
+    raise NegativeAmountException if self.amount < 0
+    sender_account.withdraw! self,amount
+    receiver_account.deposit! self,amount
+  end
+
+  class NegativeAmountException < StandardError
   end
 end
