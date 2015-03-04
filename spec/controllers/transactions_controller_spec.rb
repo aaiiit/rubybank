@@ -22,6 +22,7 @@ RSpec.describe TransactionsController, type: :controller do
   before do
     @sender = User.create(login: 'Sender',password: '12345',password_confirmation: '12345')
     @receiver = User.create(login: 'Receiver',password: '12345',password_confirmation: '12345')
+    controller.stub(:current_user).and_return(@sender)
   end
 
   # This should return the minimal set of attributes required to create a valid

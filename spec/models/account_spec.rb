@@ -14,17 +14,20 @@ RSpec.describe Account, type: :model do
       expect(@user.account.balance).to eq(0)
     end
 
-    context "when given credits" do
+    context "when given 100 credits" do
+      subject(:account) do
+        @user.account
+      end
       before do
-        @user.account.add_credits(100)
+        account.add_credits(100)
       end
 
-      it "its balance should be changed" do
-        expect(@user.account.balance).to eq(100)
+      it "its balance should be 100" do
+        expect(account.balance).to eq(100)
       end
 
       it "an accountline should be added" do
-        expect{ @user.account.add_credits(10) }.to change{ @user.account.lines.count }.by(1)
+        expect{ account.add_credits(10) }.to change{ account.lines.count }.by(1)
       end
 
     end

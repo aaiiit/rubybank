@@ -13,10 +13,6 @@ RSpec.describe Transaction, type: :model do
     end
 
     context "pays Receiver User 100" do
-      let(:sender_balance) do
-        @sender.account.balance
-      end
-
       subject(:tx) do
         Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 100)
       end

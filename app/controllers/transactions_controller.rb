@@ -22,6 +22,7 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
+    @transaction.sender_account = current_user.account
 
     respond_to do |format|
       if @transaction.save
@@ -42,6 +43,6 @@ class TransactionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def transaction_params
-      params.require(:transaction).permit(:sender_account_id, :receiver_account_id, :amount)
+      params.require(:transaction).permit(:receiver_account_id, :amount)
     end
 end
