@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :transactions
+  resources :transfers
 
   resources :accounts, only: [:show]
   resource :user_session

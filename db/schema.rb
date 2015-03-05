@@ -14,7 +14,7 @@
 ActiveRecord::Schema.define(version: 20150304171337) do
 
   create_table "account_lines", force: true do |t|
-    t.integer  "transaction_id"
+    t.integer  "transfer_id"
     t.integer  "account_id"
     t.integer  "amount"
     t.datetime "created_at"
@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20150304171337) do
     t.datetime "updated_at"
   end
 
-  create_table "transactions", force: true do |t|
+  create_table "transfers", force: true do |t|
     t.integer  "sender_account_id"
     t.integer  "receiver_account_id"
     t.integer  "amount"
