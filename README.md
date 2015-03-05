@@ -33,14 +33,19 @@ On the account page there is an audit trail so we can see how we got to the curr
     ```
 
   * Run tests
+
     ```
     bundle exec r spec
     ```
+
   * Run server
+
     ```
     bundle exec rails s
     ```
+
   * Run console and add users
+
     ```
     bundle exec rails c
     User.create login: 'mestdaght',password: '12345', password_confirmation: '12345'
