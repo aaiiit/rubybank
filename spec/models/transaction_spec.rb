@@ -10,6 +10,7 @@ RSpec.describe Transaction, type: :model do
       @sender = User.create(login: 'Sender',password: '12345',password_confirmation: '12345')
       @receiver = User.create(login: 'Receiver',password: '12345',password_confirmation: '12345')
       @sender.account.add_credit 100
+      @sender.account.save
     end
 
     context "pays Receiver -5" do

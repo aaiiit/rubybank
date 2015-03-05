@@ -12,9 +12,17 @@ Logged in as <%= current_user.login %>
 <h2>Audit</h2>
 <ol>
 <% sum = 0 %>
-<% @account.lines.each do |l| %>
+  <li>Manually added credit</li>
+<% @account.lines.all.manual.each do |l| %>
   <% sum += l.amount %>
   <li><%=  l.amount %></li>
+<% end %>
+  <li>Deposits and Withdrawals</li>
+  <% @account.lines.transacted.each do |l| %>
+  <% amount = (l.amount * -1) if l.transaction.sender_account == @account %>
+  <% amount = l.amount if l.transaction.receiver_account == @account %>
+  <li><%=  amount %></li>
+  <% sum += amount %>
 <% end %>
 </ol>
 

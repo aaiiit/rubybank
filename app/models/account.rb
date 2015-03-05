@@ -1,13 +1,15 @@
 class Account < ActiveRecord::Base
   belongs_to :user
   has_many :lines, class_name: 'AccountLine'
+  has_many :transactions, through: :lines, class_name: 'Transaction', source: 'transact'
 
   validates :user_id, presence: true
   
-  # Manually add credits for this Account
+  # Manually add credit for this Account
   def add_credit(amount)
-    self.lines.create(amount: amount)
-    self.update_attribute(:balance,self.balance + amount)
+    raise Transaction::NegativeAmountException if(amount < 0)
+    self.lines.create(amount: self.balance + amount)
+    self.balance += amount
   end
 
   def deposit!(tx,amount)
@@ -23,6 +25,5 @@ class Account < ActiveRecord::Base
 
 
   class BalanceExceededException < StandardError
-
   end
 end
