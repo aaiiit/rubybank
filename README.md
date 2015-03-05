@@ -20,14 +20,18 @@ On the account page there is an audit trail so we can see how we got to the curr
 ## Usage
 
   * Install gems
+
     ```
     bundle
     ```
+
   * Setup database
+
     ```
     bundle exec rake db:migrate
     bundle exec rake db:seed  # to add test users
     ```
+
   * Run tests
     ```
     bundle exec r spec
