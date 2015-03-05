@@ -1,7 +1,7 @@
 class Account < ActiveRecord::Base
   belongs_to :user
   has_many :lines, class_name: 'AccountLine'
-  has_many :transfers, through: :lines, class_name: 'Transfer', source: 'transact'
+  has_many :transfers, through: :lines
 
   validates :user_id, presence: true
   

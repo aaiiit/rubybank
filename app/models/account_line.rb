@@ -5,15 +5,5 @@ class AccountLine < ActiveRecord::Base
   validates :account_id, presence: true
 
   scope :manual, -> { where(transfer_id: nil) }
-  scope :transacted, -> { where(transfer_id: !nil) }
-
-  # Returns the correct amount so we can audit
-  def amount_for_user(user)
-    puts self.inspect
-    if self.transact
-      0
-    else
-      amount
-    end
-  end
+  scope :transferred, -> { where(transfer_id: !nil) }
 end

@@ -10,20 +10,22 @@ Logged in as <%= current_user.login %>
 <hr />
 
 <h2>Audit</h2>
-<ol>
+Manually added credit
+<ul>
 <% sum = 0 %>
-  <li>Manually added credit</li>
-<% @account.lines.all.manual.each do |l| %>
+<% @account.lines.manual.each do |l| %>
   <% sum += l.amount %>
   <li><%=  l.amount %></li>
 <% end %>
-  <li>Deposits and Withdrawals</li>
-  <% @account.lines.transacted.each do |l| %>
-  <% amount = (l.amount * -1) if l.transfer.sender_account == @account %>
-  <% amount = l.amount if l.transfer.receiver_account == @account %>
+</ul>
+Deposits and Withdrawals
+<ul>
+  <% @account.transfers.each do |t| %>
+  <% amount = (t.amount * -1) if t.sender_account == @account %>
+  <% amount = t.amount if t.receiver_account == @account %>
   <li><%=  amount %></li>
   <% sum += amount %>
 <% end %>
-</ol>
+</ul>
 
 TOTAL <%= sum %>
