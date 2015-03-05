@@ -2,18 +2,18 @@
 
 <p>
   <strong>Sender account:</strong>
-  <%= @transaction.sender_account_id %>
+  <%= @transfer.sender_account_id %>
 </p>
 
 <p>
   <strong>Receiver account:</strong>
-  <%= @transaction.receiver_account_id %>
+  <%= @transfer.receiver_account_id %>
 </p>
 
 <p>
   <strong>Amount:</strong>
-  <%= @transaction.amount %>
+  <%= @transfer.amount %>
 </p>
 
-<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
-<%= link_to 'Back', transactions_path %>
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>

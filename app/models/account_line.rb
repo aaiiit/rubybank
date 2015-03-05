@@ -1,5 +1,5 @@
 class AccountLine < ActiveRecord::Base
-  belongs_to :transact, class_name: 'Transfer'
+  belongs_to :transfer
   belongs_to :account
 
   validates :account_id, presence: true
