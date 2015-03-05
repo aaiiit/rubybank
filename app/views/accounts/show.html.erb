@@ -5,7 +5,7 @@ Logged in as <%= current_user.login %>
 <%= @account.balance %>
 <hr />
 
-<%= link_to "Een betaling uitvoeren",new_transfer_path %>
+<%= link_to t('.payment', :default => t("helpers.links.payment.new")),new_transfer_path, :class => 'btn btn-primary' %>
 
 <hr />
 

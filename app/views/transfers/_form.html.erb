@@ -1,25 +1,38 @@
-<%= form_for(@transfer) do |f| %>
-  <% if @transfer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@transfer.errors.count, "error") %> prohibited this transfer from being saved:</h2>
+<%= form_for @transfer, :html => { :class => "form-horizontal transfer" } do |f| %>
 
-      <ul>
-      <% @transfer.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <% if @transfer.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@transfer.errors.count, "error") %> prohibited this transfer from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @transfer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :receiver_account_id %><br>
-    <%= f.select :receiver_account_id,User.all.collect { |u| [u.login,u.id] } %>
+  <div class="control-group">
+    <%= f.label :receiver_account_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select :receiver_account_id,User.all.collect { |u| [u.login,u.id] }, :class => 'form-control' %>
+    </div>
+    <%= error_span(@transfer[:receiver_account_id]) %>
   </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.number_field :amount, step: 1 %>
+  <div class="control-group">
+    <%= f.label :amount, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.number_field :amount, :step => 1, :class => 'form-control' %>
+    </div>
+    <%= error_span(@transfer[:amount]) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            transfers_path, :class => 'btn btn-default' %>
+
 <% end %>

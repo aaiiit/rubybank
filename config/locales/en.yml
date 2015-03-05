@@ -21,3 +21,8 @@
 
 en:
   hello: "Hello world"
+  helpers:
+    links:
+      payment:
+        new: 'Make a payment'
+
