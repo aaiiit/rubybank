@@ -18,7 +18,7 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe TransactionsController, type: :controller do
+RSpec.describe TransfersController, type: :controller do
   before do
     @sender = User.create(login: 'Sender',password: '12345',password_confirmation: '12345')
     @sender.account.add_credit 100
@@ -27,7 +27,7 @@ RSpec.describe TransactionsController, type: :controller do
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # Transaction. As you add validations to Transaction, be sure to
+  # Transfer. As you add validations to Transfer, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id, amount: 1}
@@ -41,45 +41,45 @@ RSpec.describe TransactionsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # TransactionsController. Be sure to keep this updated too.
+  # TransfersController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #new" do
-    it "assigns a new transaction as @transaction" do
+    it "assigns a new transfer as @transfer" do
       get :new, {}, valid_session
-      expect(assigns(:transaction)).to be_a_new(Transaction)
+      expect(assigns(:transfer)).to be_a_new(Transfer)
     end
   end
 
   describe "POST #create" do
     context "with valid params" do
-      it "creates a new Transaction" do
+      it "creates a new Transfer" do
         expect {
-          post :create, {:transaction => valid_attributes}, valid_session
-        }.to change(Transaction, :count).by(1)
+          post :create, {:transfer => valid_attributes}, valid_session
+        }.to change(Transfer, :count).by(1)
       end
 
-      it "assigns a newly created transaction as @transaction" do
-        post :create, {:transaction => valid_attributes}, valid_session
-        expect(assigns(:transaction)).to be_a(Transaction)
-        expect(assigns(:transaction)).to be_persisted
-        expect(assigns(:transaction).sender_account.balance).to eq(99)
+      it "assigns a newly created transfer as @transfer" do
+        post :create, {:transfer => valid_attributes}, valid_session
+        expect(assigns(:transfer)).to be_a(Transfer)
+        expect(assigns(:transfer)).to be_persisted
+        expect(assigns(:transfer).sender_account.balance).to eq(99)
       end
 
-      it "redirects to the created transaction" do
-        post :create, {:transaction => valid_attributes}, valid_session
-        expect(response).to redirect_to(Transaction.last.sender_account)
+      it "redirects to the created transfer" do
+        post :create, {:transfer => valid_attributes}, valid_session
+        expect(response).to redirect_to(Transfer.last.sender_account)
       end
     end
 
     context "with invalid params" do
-      it "assigns a newly created but unsaved transaction as @transaction" do
-        post :create, {:transaction => invalid_attributes}, valid_session
-        expect(assigns(:transaction)).to be_a_new(Transaction)
+      it "assigns a newly created but unsaved transfer as @transfer" do
+        post :create, {:transfer => invalid_attributes}, valid_session
+        expect(assigns(:transfer)).to be_a_new(Transfer)
       end
 
       it "re-renders the 'new' template" do
-        post :create, {:transaction => invalid_attributes}, valid_session
+        post :create, {:transfer => invalid_attributes}, valid_session
         expect(response).to render_template("new")
       end
     end

@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Transaction, type: :model do
-  it "should not be possible to create an empty transaction" do
-    expect(Transaction.create.persisted?).to eq(false)
+RSpec.describe Transfer, type: :model do
+  it "should not be possible to create an empty transfer" do
+    expect(Transfer.create.persisted?).to eq(false)
   end
 
   context "A Sender User with 100 starting credit" do
@@ -15,18 +15,18 @@ RSpec.describe Transaction, type: :model do
 
     context "pays Receiver -5" do
       it "raises NegativeAmountException" do
-        tx = Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: -5)
-        expect { tx.save }.to raise_error(Transaction::NegativeAmountException)
+        tx = Transfer.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: -5)
+        expect { tx.save }.to raise_error(Transfer::NegativeAmountException)
       end
 
     end
 
     context "pays Receiver User 100" do
       subject(:tx) do
-        Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 100)
+        Transfer.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 100)
       end
 
-      it "creates a transaction" do
+      it "creates a transfer" do
         expect(tx.save).not_to eq(false)
       end
 
@@ -45,7 +45,7 @@ RSpec.describe Transaction, type: :model do
 
     context "pays Receiver User 101" do
       subject(:tx) do
-        Transaction.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 101)
+        Transfer.new(sender_account_id: @sender.account.id,receiver_account_id: @receiver.account.id,amount: 101)
       end
 
       it "which exceeds the balance" do

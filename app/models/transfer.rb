@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class Transfer < ActiveRecord::Base
   belongs_to :sender_account, class_name: 'Account'
   belongs_to :receiver_account, class_name: 'Account'
 
