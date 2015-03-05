@@ -18,7 +18,7 @@
   <div class="control-group">
     <%= f.label :receiver_account_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select :receiver_account_id,User.all.collect { |u| [u.login,u.id] }, :class => 'form-control' %>
+      <%= f.select :receiver_account_id,User.all.drop_while{ |u| u == current_user }.collect { |u| [u.login,u.id] }, :class => 'form-control' %>
     </div>
     <%= error_span(@transfer[:receiver_account_id]) %>
   </div>
